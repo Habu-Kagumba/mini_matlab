@@ -14,56 +14,53 @@ class Tokenizer(object):  # noqa
     def __init__(self, chars):
         """Initialize the Tokenizer class.
 
-        :chars: Passed in characters to parse from the the repl.
+        :chars: Passed in arguments to parse from the the repl.
         """
         self.chars = chars
 
         bounds = 'BOUNDS'
-        separator = 'SEPARATOR'
         operator = 'OPERATOR'
-        int = 'INT'
+        variable = 'VARIABLE'
+        assignment = 'ASSIGNMENT'
 
         # the expression used to parse and group the arguments
         expressions = [
             (r'[ \n\t ]+', None),
             (r'#[^\n]*', None),
-            (r'\[', bounds),
-            (r'\]', bounds),
-            (r'\;', separator),
+            (r'[a-zA-Z]', variable),
+            (r'\=', assignment),
+            (r'\[([0-9, ;]+)\]', bounds),
             (r'\+', operator),
             (r'-', operator),
             (r'\*', operator),
-            (r'\'', operator),
-            (r'[0-9]+', int)
+            (r'\'', operator)
         ]
 
         self.exprs = expressions
 
     @staticmethod
     def tokenizer(arguments, patterns_exprs):
-        """Parse the characters against the expressions.
+        """Parse the arguments against the expressions.
 
-        :arguments: The characters to be parsed.
+        :arguments: The arguments to be parsed.
         :patterns_exprs: the pattern expression for matching.
         """
-        characters = re.sub(r'\s*,\s*', ' ', arguments)
-
         pos = 0
         tokens = []
-        while pos < len(characters):
+        while pos < len(arguments):
             match = None
             for expr in patterns_exprs:
                 pattern, tag = expr
                 regex = re.compile(pattern)
-                match = regex.match(characters, pos)
+                match = regex.match(arguments, pos)
                 if match:
                     text = match.group(0)
                     if tag:
-                        token = (text, tag)
+                        token = (tag, text)
                         tokens.append(token)
                     break
             if not match:
-                sys.stderr.write('Illegal character: %s\n' % characters[pos])
+                sys.stderr.write('Illegal character: %s\n' % arguments[pos])
                 sys.exit(1)
             else:
                 pos = match.end(0)
