@@ -5,7 +5,8 @@ from setuptools import setup
 
 
 REQUIRES = [
-    'prompt-toolkit'
+    'prompt-toolkit',
+    'numpy'
 ]
 
 
