@@ -5,7 +5,7 @@ from setuptools import setup
 
 
 REQUIRES = [
-    'click'
+    'prompt-toolkit'
 ]
 
 
