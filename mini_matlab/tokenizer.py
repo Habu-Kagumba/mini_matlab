@@ -22,14 +22,17 @@ class Tokenizer(object):  # noqa
         operator = 'OPERATOR'
         variable = 'VARIABLE'
         assignment = 'ASSIGNMENT'
+        ints = 'INTS'
 
         # the expression used to parse and group the arguments
         expressions = [
             (r'[ \n\t ]+', None),
             (r'#[^\n]*', None),
+            (r'inv\([a-zA-Z]\)', operator),
             (r'[a-zA-Z]', variable),
             (r'\=', assignment),
             (r'\[([0-9, ;]+)\]', bounds),
+            (r'\d', ints),
             (r'\+', operator),
             (r'-', operator),
             (r'\*', operator),
@@ -60,8 +63,9 @@ class Tokenizer(object):  # noqa
                         tokens.append(token)
                     break
             if not match:
-                sys.stderr.write('Illegal character: %s\n' % arguments[pos])
-                sys.exit(1)
+                sys.stdout.write(
+                    'Illegal character: `%s`\n' % arguments[pos])
+                break
             else:
                 pos = match.end(0)
         return tokens
