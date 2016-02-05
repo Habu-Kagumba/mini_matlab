@@ -49,7 +49,7 @@ Features
     c * d
     ```
   * Addition / Subtraction
-    ```bash
+    ```
     b + c
     ```
 
