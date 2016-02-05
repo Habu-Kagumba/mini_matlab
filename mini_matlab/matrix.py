@@ -77,8 +77,6 @@ class Matrix(object):  # noqa
             elif operands[0].startswith('inv'):
                 result = np.linalg.inv(operands[1])
             return result
-        # except (TypeError, ValueError, np.linalg.LinAlgError):
-        #     return None
-        except Exception, e:
-            raise e
+        except (TypeError, ValueError, np.linalg.LinAlgError):
+            return None
 
