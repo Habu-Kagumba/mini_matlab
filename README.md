@@ -11,6 +11,15 @@ You can install through pip straight from my github repo. *Preferably do this in
 pip install -e git+https://github.com/Habu-Kagumba/mini_matlab#egg=mini_matlab
 ```
 
+or alternatively you can clone this repo and install from the root directory.
+
+```bash
+git clone https://github.com/Habu-Kagumba/mini_matlab
+
+# Recommended - do this in an environment.
+
+python setup.py develop
+```
 
 Running is as easy as;
 
@@ -38,12 +47,10 @@ Features
     ```bash
     b'
     ```
-
   * Inverse
     ```bash
     inv(d)
     ```
-
   * Multiplication
     ```bash
     c * d
