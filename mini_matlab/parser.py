@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 """Parse the input."""
 
-import sys
 import re
 
 from tokenizer import Tokenizer
 from matrix import Matrix
+from utils import color_output
 
 
 class Parser(object):  # noqa
@@ -35,20 +35,20 @@ class Parser(object):  # noqa
                 if value:
                     value_mx = m.to_matrix(value)
                     if value_mx is not None:
-                        sys.stdout.write(str(value_mx) + '\n')
+                        color_output(value_mx)
                     else:
-                        sys.stdout.write('Input error.\n')
+                        color_output('Input error.')
                 else:
-                    sys.stdout.write(
-                        'Variable `{}` not defined.\n'.format(
+                    color_output(
+                        'Variable `{}` not defined.'.format(
                             str(tokens[0][1])))
             elif tokens[0][0] == self.bounds:
                 # display array / list
                 mx = m.to_matrix(tokens[0][1])
                 if mx is not None:
-                    sys.stdout.write(str(mx) + '\n')
+                    color_output(mx)
                 else:
-                    sys.stdout.write('Input error.\n')
+                    color_output('Input error')
             elif tokens[0][0] == self.operator:
                 o = tokens[0][1]
                 if o.startswith('inv'):
@@ -62,22 +62,22 @@ class Parser(object):  # noqa
                         if var_x is not None:
                             res = m.arith(('inverse', var_x, None))
                             if res is not None:
-                                sys.stdout.write(str(res) + '\n')
+                                color_output(res)
                             else:
-                                sys.stdout.write('Wrong matrix format.\n')
+                                color_output('Wrong matrix format.')
                         else:
-                            sys.stdout.write('Input error.\n')
+                            color_output('Input error.')
                     else:
-                        sys.stdout.write(
-                            'Variable `{}` not defined.\n'.format(
+                        color_output(
+                            'Variable `{}` not defined.'.format(
                                 str(tokens[0][1])))
             else:
-                sys.stdout.write('Wrong input...\n')
+                color_output('Wrong input...')
 
         if len(tokens) == 2:
             if tokens[0][0] == self.variable:
                 if tokens[1][0] != self.operator:
-                    sys.stdout.write('Wrong input...\n')
+                    color_output('Wrong input...')
                 else:
                     if tokens[1][1] == '\'':
                         tr_value = m.find_variable(tokens[0][1])
@@ -85,17 +85,17 @@ class Parser(object):  # noqa
                             tr_value_mx = m.to_matrix(tr_value)
                             if tr_value_mx is not None:
                                 tr = m.transpose(tr_value_mx)
-                                sys.stdout.write(str(tr) + '\n')
+                                color_output(str(tr))
                             else:
-                                sys.stdout.write('Input error.\n')
+                                color_output('Input error.')
                         else:
-                            sys.stdout.write(
-                                'Variable `{}` not defined.\n'.format(
+                            color_output(
+                                'Variable `{}` not defined.'.format(
                                     str(tokens[0][1])))
                     else:
-                        sys.stdout.write('Wrong input...\n')
+                        color_output('Wrong input...')
             else:
-                sys.stdout.write('Wrong input...\n')
+                color_output('Wrong input...')
 
         if len(tokens) == 3:
             if tokens[0][0] == self.variable:
@@ -112,8 +112,8 @@ class Parser(object):  # noqa
                         if assigner_val:
                             m.var_assigner((assignee, assigner_val))
                         else:
-                            sys.stdout.write(
-                                'Variable `{}` not defined.\n'.format(
+                            color_output(
+                                'Variable `{}` not defined.'.format(
                                     str(assigner)))
                 elif tokens[1][0] == self.operator:
                     op = tokens[1][1]
@@ -126,12 +126,12 @@ class Parser(object):  # noqa
                                 op_res = m.arith((op_vars, op_bounds, op))
                                 print op_res
                                 if op_res is not None:
-                                    sys.stdout.write(str(op_res) + '\n')
+                                    color_output(str(op_res))
                                 else:
-                                    sys.stdout.write(
-                                        'Operation not valid.\n')
+                                    color_output(
+                                        'Operation not valid.')
                             else:
-                                sys.stdout.write('Input error.\n')
+                                color_output('Input error.')
                         elif tokens[2][0] == self.variable:
                             val = m.find_variable(tokens[2][1])
                             if val is not None:
@@ -139,31 +139,31 @@ class Parser(object):  # noqa
                                 op_results = m.arith(
                                     (op_vars, var_value, op))
                                 if op_results is not None:
-                                    sys.stdout.write(str(op_results) + '\n')
+                                    color_output(str(op_results))
                                 else:
-                                    sys.stdout.write(
-                                        'Operation not valid.\n')
+                                    color_output(
+                                        'Operation not valid.')
                             else:
-                                sys.stdout.write(
-                                    'Variable `{}` not defined.\n'.format(
+                                color_output(
+                                    'Variable `{}` not defined.'.format(
                                         tokens[2][1]))
                     else:
-                        sys.stdout.write(
-                            'Variable `{}` not defined.\n'.format(
+                        color_output(
+                            'Variable `{}` not defined.'.format(
                                 tokens[0][1]))
                 else:
-                    sys.stdout.write('Wrong input...\n')
+                    color_output('Wrong input...')
             elif tokens[0][0] == self.bounds:
                 if tokens[1][0] == self.operator:
                     if tokens[2][0] == self.self.bounds:
-                        sys.stdout.write('Perform operation on bounds.\n')
+                        color_output('Perform operation on bounds.')
                     elif tokens[2][0] == self.variable:
-                        sys.stdout.write('Perform operation on variable.\n')
+                        color_output('Perform operation on variable.')
                 else:
-                    sys.stdout.write('Wrong input...\n')
+                    color_output('Wrong input...')
 
         if len(tokens) > 3:
-            sys.stdout.write('Not implemented yet. WIP\n')
+            color_output('Not implemented yet. WIP')
 
     def save_retrieve_args(self):
         """Save and retrieve arguments."""
