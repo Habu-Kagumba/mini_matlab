@@ -2,18 +2,6 @@
 Mini Matlab REPL Clone
 ===============================
 
-.. .. image:: https://badge.fury.io/py/mini_matlab.png
-..     :target: http://badge.fury.io/py/mini_matlab
-
-.. .. image:: https://travis-ci.org/Habu-Kagumba/mini_matlab.png?branch=master
-..         :target: https://travis-ci.org/Habu-Kagumba/mini_matlab
-
-.. .. image:: https://pypip.in/d/mini_matlab/badge.png
-..         :target: https://crate.io/packages/mini_matlab?version=latest
-
-
-Mini Matlab clone (REPL)
-
 Installing and running
 ----------------------
 
@@ -27,7 +15,7 @@ You can install through pip straight from my github repo.
 Running is as easy as;
 
 ```bash
-mini_matrix
+mini_matlab
 ```
 
 Features
@@ -45,7 +33,7 @@ Features
   d = [1 3 5; 2 5 1; 3 5 2]
 ```
 
-- Basic Matrix operations
+- **Basic Matrix operations.**
   * Transpose
     ```bash
     b'
@@ -65,14 +53,14 @@ Features
     b + c
     ```
 
-- Ability to save workspace on exit.
+- **Ability to save workspace on exit.**
 
 ```bash
   Do you want to save your workspace? (yes|no) yes
   Successfully saved your workspace. Goodbye.
 ```
 
-- Autocomplete features with mouse capability.
+- **Autocomplete features with mouse capability.**
 
 
 Requirements
