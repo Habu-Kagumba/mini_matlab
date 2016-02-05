@@ -5,7 +5,7 @@ Mini Matlab REPL Clone
 Installing and running
 ----------------------
 
-You can install through pip straight from my github repo. *Preferably do this in a virtual environment*
+You can install through pip straight from my github repo. *Preferably do this in a virtual environment*.
 
 ```bash
 pip install -e git+https://github.com/Habu-Kagumba/mini_matlab#egg=mini_matlab
