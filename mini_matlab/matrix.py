@@ -1,9 +1,30 @@
 #!/usr/bin/env python
 """Minimal linear algebra operations to matrices."""
 
+import ast
 import numpy as np
 
 input_vars = {}
+
+
+def save_namespace(filename='.workspace.mat'):
+    """Save the current workspace."""
+    namespace_file = open(filename, 'wb')
+    namespace_file.write(str(input_vars) + '\n')
+    namespace_file.close()
+
+
+def load_namespace(filename='.workspace.mat'):
+    """Load saved workspace if any."""
+    try:
+        namespace_file = open(filename, 'r')
+        v = namespace_file.read()
+        namespace_file.close()
+
+        vars = ast.literal_eval(v)
+        input_vars.update(vars)
+    except IOError:
+        pass
 
 
 class Matrix(object):  # noqa
@@ -60,3 +81,4 @@ class Matrix(object):  # noqa
         #     return None
         except Exception, e:
             raise e
+

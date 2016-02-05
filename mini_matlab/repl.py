@@ -7,10 +7,11 @@ from pygments.lexers import MathematicaLexer
 from prompt_toolkit.history import FileHistory
 from prompt_toolkit.contrib.completers import WordCompleter
 
-import sys
 import os
 
 from parser import Parser
+from utils import color_output
+from matrix import save_namespace, load_namespace
 
 
 intro = """ Welcome to Mini Matlab, a minimal Matlab clone.
@@ -18,9 +19,7 @@ intro = """ Welcome to Mini Matlab, a minimal Matlab clone.
 
 Commands:
     Exit - `exit`
-    Help = `help`"""
-
-help = """ """
+    Help = `help` - Print this message."""
 
 
 class MatlabFileHistory(FileHistory):  # noqa
@@ -74,25 +73,39 @@ class Repl(object):  # noqa
             return WordCompleter(
                 list(set(autocomplete_list)), ignore_case=True)
 
+    def workspace(self):
+        """Save the workspace to file for next session loading."""
+        save_work = raw_input(
+            'Do you want to save your workspace? (yes|no) ')
+        if save_work == 'yes':
+            save_namespace()
+            color_output('Successfully saved your workspace. Goodbye.')
+        else:
+            color_output('GoodBye...')
+
     def run_repl(self):
         """Run the REPL loop."""
-        sys.stdout.write(str(intro) + '\n')
+        color_output(intro)
+        load_namespace()
         while True:
             try:
                 val = prompt(
                     'Mini Matlab >> ',
                     lexer=MathematicaLexer,
                     history=self.hist,
-                    completer=self.autocomplete()
+                    completer=self.autocomplete(),
+                    display_completions_in_columns=True,
+                    mouse_support=True
                 )
                 if val == 'exit':
+                    self.workspace()
                     break
                 elif val == 'help':
-                    sys.stdout.write(str(intro) + '\n')
+                    color_output(intro)
                 else:
                     parser = Parser(val)
                     parser.save_retrieve_args()
             except (KeyboardInterrupt, SystemExit, EOFError):
-                sys.stdout.write('Goodbye!!!\n')
-                sys.exit(1)
+                self.workspace()
+                break
 
