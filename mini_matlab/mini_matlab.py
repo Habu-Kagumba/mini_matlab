@@ -10,7 +10,7 @@ __license__ = "MIT"
 
 def main():
     """A prompt-read-eval loop."""
-    repl = Repl('.save.mat')
+    repl = Repl('.autocomplete.mat')
     repl.run_repl()
 
 
