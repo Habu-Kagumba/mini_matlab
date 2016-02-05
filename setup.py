@@ -44,7 +44,7 @@ setup(
     name='mini_matlab',
     version="0.0.1",
     description='Mini Matlab clone (REPL)',
-    long_description=read("README.rst"),
+    long_description=read("README.md"),
     author='Herbert Kagumba',
     author_email='habukagumba@gmail.com',
     url='https://github.com/Habu-Kagumba/mini_matlab',
