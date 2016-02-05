@@ -44,18 +44,25 @@ Features
 
 - **Basic Matrix operations.**
   * Transpose
+  
     ```bash
     b'
     ```
+    
   * Inverse
+  
     ```bash
     inv(d)
     ```
+    
   * Multiplication
+  
     ```bash
     c * d
     ```
+  
   * Addition / Subtraction
+  
     ```
     b + c
     ```
