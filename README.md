@@ -8,7 +8,7 @@ Installing and running
 You can install through pip straight from my github repo.
 
 ```bash
-  pip install -e git+https://github.com/Habu-Kagumba/mini_matlab#egg=mini_matlab
+pip install -e git+https://github.com/Habu-Kagumba/mini_matlab#egg=mini_matlab
 ```
 
 
@@ -21,7 +21,7 @@ mini_matlab
 Features
 --------
 
-- Array and Matrix creation through variables
+- **Array and Matrix creation through variables.**
 
 ```python
   a = [1, 2, 3]
@@ -53,7 +53,7 @@ Features
     b + c
     ```
 
-- **Ability to save workspace on exit.**
+- **Ability to save workspace on exit and automatically loaded during the next session.**
 
 ```bash
   Do you want to save your workspace? (yes|no) yes
