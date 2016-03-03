@@ -6,7 +6,8 @@ from setuptools import setup
 
 REQUIRES = [
     'prompt-toolkit',
-    'numpy'
+    'numpy',
+    'pygments'
 ]
 
 
@@ -62,7 +63,7 @@ setup(
     py_modules=["mini_matlab"],
     entry_points={
         'console_scripts': [
-            "mini_matlab = mini_matlab.mini_matlab:main"
+            "minimatlab = mini_matlab.mini_matlab:main"
         ]
     },
     tests_require=['nose'],
